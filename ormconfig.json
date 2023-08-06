@@ -1,8 +1,0 @@
-{
-    "type": "postgres",
-    "host": "localhost",
-    "username": "docker",
-    "password": "docker123",
-    "database": "car_register",
-    "port": 5432
-}
