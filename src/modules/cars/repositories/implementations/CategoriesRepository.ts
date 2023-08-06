@@ -1,4 +1,4 @@
-import { Repository, getRepository } from "typeorm";
+import { Repository } from "typeorm";
 
 import { AppDataSource } from "../../../../database";
 import { Category } from "../../entities/Category";
