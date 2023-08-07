@@ -13,7 +13,11 @@ class CreateUserUseCase {
   ) {}
 
   async execute(data: ICreateUserDto): Promise<User> {
-    const { password } = data;
+    const { email, password } = data;
+    const userExists = await this.usersRepository.findByEmail(email);
+
+    if (userExists) throw new Error("Email already have been used before");
+
     const hashedPassword = await hash(password, 8);
     const user = await this.usersRepository.create({
       ...data,
