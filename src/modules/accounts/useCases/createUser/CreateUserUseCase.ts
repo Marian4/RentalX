@@ -12,7 +12,7 @@ class CreateUserUseCase {
     private usersRepository: IUsersRepository
   ) {}
 
-  async execute(data: ICreateUserDto): Promise<User> {
+  async execute(data: ICreateUserDto): Promise<void> {
     const { email, password } = data;
     const userExists = await this.usersRepository.findByEmail(email);
 
