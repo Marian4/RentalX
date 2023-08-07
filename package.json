@@ -1,5 +1,5 @@
 {
-  "name": "modulo2",
+  "name": "RentalX",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -19,7 +19,8 @@
   },
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli"
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
+    "migration:run": "ts-node-dev ./node_modules/typeorm/cli migration:run -- -d src/database/index.ts"
   },
   "devDependencies": {
     "@types/express": "^4.17.15",

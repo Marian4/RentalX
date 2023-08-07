@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "car-register",
+        "title": "RentalX",
         "description": "Application for management of car informations",
         "version": "1.0.0",
         "contact": {
