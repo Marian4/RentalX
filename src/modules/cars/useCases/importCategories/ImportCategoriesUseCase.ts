@@ -1,5 +1,5 @@
-import { parse as csvParse } from "csv-parse";
 import fs from "fs";
+import { parse as csvParse } from "csv-parse";
 import { injectable, inject } from "tsyringe";
 
 import { CategoriesRepository } from "../../repositories/implementations/CategoriesRepository";
