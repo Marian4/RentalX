@@ -19,12 +19,10 @@ class CreateUserUseCase {
     if (userExists) throw new AppError("Email already have been used before");
 
     const hashedPassword = await hash(password, 8);
-    const user = await this.usersRepository.create({
+    await this.usersRepository.create({
       ...data,
       password: hashedPassword,
     });
-
-    return user;
   }
 }
 
