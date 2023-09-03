@@ -25,7 +25,8 @@
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
     "migration:run": "ts-node-dev ./node_modules/typeorm/cli migration:run -- -d src/database/index.ts",
-    "test": "jest"
+    "test": "jest",
+    "seed": "ts-node-dev ./src/database/seeds/admin.ts"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

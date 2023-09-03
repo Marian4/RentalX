@@ -1,6 +1,7 @@
 import { Router } from "express";
 import multer from "multer";
 
+import { ensureUserisAnAdmin } from "../middlewares/ensureUserIsAnAdmin";
 import { ensureUserisAuthenticated } from "../middlewares/ensureUserIsAuthenticated";
 import { CreateCategoryController } from "../modules/cars/useCases/createCategory/CreateCategoryController";
 import { ImportCategoriesController } from "../modules/cars/useCases/importCategories/ImportCategoriesController";
@@ -15,11 +16,19 @@ const createCategoryController = new CreateCategoryController();
 const listCategoriesController = new ListCategoriesController();
 const importCategoriesController = new ImportCategoriesController();
 
-categoriesRoutes.use(ensureUserisAuthenticated);
-categoriesRoutes.post("/", createCategoryController.handle);
+categoriesRoutes.post(
+  "/",
+  ensureUserisAuthenticated,
+  ensureUserisAnAdmin,
+  createCategoryController.handle
+);
+
 categoriesRoutes.get("/", listCategoriesController.handle);
+
 categoriesRoutes.post(
   "/import",
+  ensureUserisAuthenticated,
+  ensureUserisAnAdmin,
   upload.single("file"),
   importCategoriesController.handle
 );

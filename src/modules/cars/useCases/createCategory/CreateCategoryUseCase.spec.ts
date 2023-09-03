@@ -1,11 +1,13 @@
 import { AppError } from "../../../../errors/AppError";
-import { Category } from "../../entities/Category";
 import { CategoriesRepositoryInMemory } from "../../repositories/in-memory/CategoriesRepositoryInMemory";
 import { CreateCategoryUseCase } from "./CreateCategoryUseCase";
 
 let categoriesRepository: CategoriesRepositoryInMemory;
 let createCategoryUseCase: CreateCategoryUseCase;
-let category: Category;
+const dataExample = {
+  name: "test",
+  description: "this is a test",
+};
 
 describe("Create Category", () => {
   beforeAll(() => {
@@ -14,20 +16,14 @@ describe("Create Category", () => {
   });
 
   it("Should be able to create a category", async () => {
-    category = await createCategoryUseCase.execute({
-      name: "test",
-      description: "this is a test",
-    });
+    const category = await createCategoryUseCase.execute(dataExample);
 
     expect(category).toHaveProperty("id");
   });
 
   it("Should not be able to create a category with a repeated name", async () => {
-    expect(
-      createCategoryUseCase.execute({
-        name: category.name,
-        description: "repeating a category",
-      })
-    ).rejects.toBeInstanceOf(AppError);
+    expect(createCategoryUseCase.execute(dataExample)).rejects.toBeInstanceOf(
+      AppError
+    );
   });
 });
