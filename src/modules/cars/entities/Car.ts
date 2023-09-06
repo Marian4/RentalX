@@ -38,6 +38,9 @@ class Car {
   category: Category;
 
   @Column()
+  category_id: string;
+
+  @Column()
   available: boolean;
 
   @CreateDateColumn()

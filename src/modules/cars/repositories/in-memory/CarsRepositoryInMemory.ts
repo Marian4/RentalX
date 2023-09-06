@@ -1,11 +1,10 @@
 import { Car } from "../../entities/Car";
-import { ICarsRepository } from "../ICarsRepository";
-import { ICreateCategoryDTO } from "../ICategoriesRepository";
+import { ICarsRepository, ICreateCarDto } from "../ICarsRepository";
 
 class CarsRepositoryInMemory implements ICarsRepository {
   cars: Car[] = [];
 
-  async create(data: ICreateCategoryDTO): Promise<Car> {
+  async create(data: ICreateCarDto): Promise<Car> {
     const car = new Car();
 
     Object.assign(car, data);
@@ -19,6 +18,26 @@ class CarsRepositoryInMemory implements ICarsRepository {
     const car = this.cars.find((car) => car.license_plate === license_plate);
 
     return car;
+  }
+
+  async findAvailable(
+    name?: string,
+    category_id?: string,
+    brand?: string
+  ): Promise<Car[]> {
+    const cars = this.cars.filter((car) => car.available === true);
+
+    if (name || category_id || brand) {
+      return cars.filter((car) => {
+        return (
+          (name && car.name === name) ||
+          (category_id && car.category_id === category_id) ||
+          (brand && car.brand === brand)
+        );
+      });
+    }
+
+    return cars;
   }
 }
 
