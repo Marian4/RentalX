@@ -12,7 +12,9 @@ export interface ICreateCarDto {
 
 export interface ICarsRepository {
   create: (data: ICreateCarDto) => Promise<Car>;
+  update: (car: Car) => Promise<Car>;
   findByLicensePlate: (license_plate: string) => Promise<Car>;
+  findById: (id: string) => Promise<Car>;
   findAvailable: (
     name?: string,
     category_id?: string,
