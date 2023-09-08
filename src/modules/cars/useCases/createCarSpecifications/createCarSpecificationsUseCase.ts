@@ -28,14 +28,15 @@ class CreateCarSpecificationsUseCase {
       specifications_ids
     );
 
+    if (specifications.length !== specifications_ids.length) {
+      throw new AppError("Some specification does not exist");
+    }
+
     car.specifications = specifications;
 
     const carUpdated = await this.carsRepository.update(car);
-    console.log(carUpdated);
 
     return carUpdated;
-
-    // diff de specifications pra n sobrepor
   }
 }
 
