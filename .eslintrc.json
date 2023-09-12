@@ -25,6 +25,7 @@
     "rules": {
         "camelcase": "off",
         "import/no-unresolved": "error",
+        "import/no-extraneous-dependencies": "off",
         "@typescript-eslint/naming-convention": [
         "error",
         {
@@ -57,10 +58,6 @@
             "groups": ["module", "/^@shared/", ["parent", "sibling", "index"]],
             "alphabetize": { "order": "asc", "ignoreCase": true }
         }
-        ],
-        "import/no-extraneous-dependencies": [
-        "error",
-        { "devDependencies": ["**/*.spec.js"] }
         ],
         "linebreak-style": 0,
         "prettier/prettier": "error"
