@@ -16,7 +16,6 @@ const rentalData = {
 
 describe("Create Rental", () => {
   beforeAll(() => {
-    console.log(typeof rentalData.expected_return_date);
     rentalsRepository = new RentalsRepositoryInMemory();
     dateProvider = new DayJsDateProvider();
     createRentalUseCase = new CreateRentalUseCase(

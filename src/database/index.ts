@@ -5,7 +5,7 @@ export const AppDataSource = new DataSource({
   host: "localhost",
   username: "root",
   password: "",
-  database: "rentalx",
+  database: process.env.NODE_ENV === "test" ? "rentalx_test" : "rentalx",
   port: 3306,
   entities: ["src/modules/**/entities/*.ts"],
   migrations: ["src/database/migrations/*.ts"],

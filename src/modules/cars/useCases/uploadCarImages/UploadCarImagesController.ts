@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 
-import { UploadCarImagesUseCase } from "./UploadCarImagesUsecase";
+import { UploadCarImagesUseCase } from "./UploadCarImagesUseCase";
 
 interface IFile {
   filename: string;
