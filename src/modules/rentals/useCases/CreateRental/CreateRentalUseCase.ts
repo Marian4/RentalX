@@ -1,9 +1,9 @@
 import { inject, injectable } from "tsyringe";
 
-import { AppError } from "../../../errors/AppError";
-import { IDateProvider } from "../../../shared/providers/DateProvider/IDateProvider";
-import { Rental } from "../entities/Rental";
-import { IRentalsRepository } from "../repositories/IRentalsRepository";
+import { AppError } from "../../../../errors/AppError";
+import { IDateProvider } from "../../../../shared/providers/DateProvider/IDateProvider";
+import { Rental } from "../../entities/Rental";
+import { IRentalsRepository } from "../../repositories/IRentalsRepository";
 
 interface IRequest {
   car_id: string;

@@ -23,8 +23,6 @@ class RentalsRepositoryInMemory implements IRentalsRepository {
       (rental) => rental.car_id === car_id && !rental.end_date
     );
 
-    console.log(rental);
-
     return rental;
   }
 
