@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { IsNull, Repository } from "typeorm";
 
 import { AppDataSource } from "../../../../database";
 import { Rental } from "../../entities/Rental";
@@ -20,7 +20,7 @@ class RentalsRepository implements IRentalsRepository {
 
   async findOpenRentalByCar(car_id: string): Promise<Rental> {
     const rental = await this.repository.findOne({
-      where: { car_id, end_date: null },
+      where: { car_id, end_date: IsNull() },
     });
 
     return rental;
@@ -28,10 +28,24 @@ class RentalsRepository implements IRentalsRepository {
 
   async findOpenRentalByUser(user_id: string): Promise<Rental> {
     const rental = await this.repository.findOne({
-      where: { user_id, end_date: null },
+      where: { user_id, end_date: IsNull() },
     });
 
     return rental;
+  }
+
+  async findById(id: string): Promise<Rental> {
+    const rental = await this.repository.findOne({
+      where: { id },
+    });
+
+    return rental;
+  }
+
+  async update(rental: Rental): Promise<Rental> {
+    await this.repository.save(rental);
+
+    return this.findById(rental.id);
   }
 }
 

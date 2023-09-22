@@ -2,6 +2,7 @@ import { inject, injectable } from "tsyringe";
 
 import { AppError } from "../../../../errors/AppError";
 import { IDateProvider } from "../../../../shared/providers/DateProvider/IDateProvider";
+import { ICarsRepository } from "../../../cars/repositories/ICarsRepository";
 import { Rental } from "../../entities/Rental";
 import { IRentalsRepository } from "../../repositories/IRentalsRepository";
 
@@ -16,6 +17,8 @@ class CreateRentalUseCase {
   constructor(
     @inject("RentalsRepository")
     private rentalsRepository: IRentalsRepository,
+    @inject("CarsRepository")
+    private carsRepository: ICarsRepository,
     @inject("DayJsDateProvider")
     private dateProvider: IDateProvider
   ) {}
@@ -44,6 +47,7 @@ class CreateRentalUseCase {
       throw new AppError("Rental time must be at least 1 day");
     }
 
+    await this.carsRepository.updateAvailable(car_id, false);
     return this.rentalsRepository.create(data);
   }
 }

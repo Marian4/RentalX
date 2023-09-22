@@ -15,15 +15,8 @@ class CarsRepositoryInMemory implements ICarsRepository {
   }
 
   async update(car: Car): Promise<Car> {
-    let index;
-
-    this.cars.map((c, i) => {
-      if (c.id === car.id) {
-        index = i;
-        return car;
-      }
-      return c;
-    });
+    const index = this.cars.findIndex((item) => item.id === car.id);
+    this.cars[index] = car;
 
     return this.cars[index];
   }

@@ -11,7 +11,7 @@ import { v4 as uuidV4 } from "uuid";
 import { User } from "../../accounts/entities/User";
 import { Car } from "../../cars/entities/Car";
 
-@Entity()
+@Entity("rentals")
 class Rental {
   @PrimaryColumn()
   id: string;
