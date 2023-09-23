@@ -26,10 +26,12 @@ class CreateRentalUseCase {
   async execute(data: IRequest): Promise<Rental> {
     const { car_id, user_id, expected_return_date } = data;
 
-    const carUnavailable = await this.rentalsRepository.findOpenRentalByCar(
-      car_id
-    );
-    if (carUnavailable) throw new AppError("Car unavailable");
+    const car = await this.carsRepository.findById(car_id);
+    console.log(car);
+
+    if (!car) throw new AppError("Car does not exist");
+
+    if (!car.available) throw new AppError("Car unavailable");
 
     const userWithRental = await this.rentalsRepository.findOpenRentalByUser(
       user_id
@@ -48,6 +50,7 @@ class CreateRentalUseCase {
     }
 
     await this.carsRepository.updateAvailable(car_id, false);
+    console.log(await this.carsRepository.findById(car_id));
     return this.rentalsRepository.create(data);
   }
 }
