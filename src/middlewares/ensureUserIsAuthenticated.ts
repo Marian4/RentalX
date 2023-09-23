@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 
+import auth from "../config/auth";
 import { AppError } from "../errors/AppError";
-import { UsersRepository } from "../modules/accounts/repositories/implementations/UsersRepository";
+import { UsersTokenRepository } from "../modules/accounts/repositories/implementations/UsersTokenRepository";
 
 interface IPayload {
   sub: string;
@@ -13,6 +14,7 @@ export async function ensureUserisAuthenticated(
   response: Response,
   next: NextFunction
 ): Promise<void> {
+  const usersTokenRepository = new UsersTokenRepository();
   const authHeader = request.headers.authorization;
 
   if (!authHeader) throw new AppError("Token missing", 401);
@@ -22,16 +24,18 @@ export async function ensureUserisAuthenticated(
   try {
     const { sub: user_id } = verify(
       token,
-      "aa01fe069d11f4a6af82b67ca02c7450"
+      auth.secret_refresh_token
     ) as IPayload;
-    const usersRepository = new UsersRepository();
 
-    const user = await usersRepository.findById(user_id);
+    const user_token = await usersTokenRepository.findByUserAndRefreshToken(
+      user_id,
+      token
+    );
 
-    if (!user) throw new AppError("User does not exist", 401);
+    if (!user_token) throw new AppError("Token does not exist in database");
 
     request.user = {
-      id: user.id,
+      id: user_id,
     };
 
     next();
