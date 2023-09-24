@@ -5,4 +5,5 @@ export interface IDateProvider {
   convertToUTC(date: Date): string;
   addDaysToNow(days: number): Date;
   addHoursToNow(hours: number): Date;
+  avaliateIfItsAPassedDate(date: Date): boolean;
 }

@@ -35,6 +35,10 @@ class DayJsDateProvider implements IDateProvider {
   addHoursToNow(hours: number): Date {
     return dayjs().add(hours, "hours").toDate();
   }
+
+  avaliateIfItsAPassedDate(date: Date): boolean {
+    return this.dateNow() > date;
+  }
 }
 
 export { DayJsDateProvider };
