@@ -14,10 +14,12 @@ class UsersTokenRepository implements IUsersTokenRepository {
     this.repository = AppDataSource.getRepository("UserToken");
   }
 
-  async create(data: ICreateUserTokenDto): Promise<void> {
+  async create(data: ICreateUserTokenDto): Promise<UserToken> {
     const user_token = this.repository.create(data);
 
     await this.repository.save(user_token);
+
+    return user_token;
   }
 
   async findByUserAndRefreshToken(
