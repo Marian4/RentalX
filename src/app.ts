@@ -1,3 +1,4 @@
+import dotenv from "dotenv";
 import express from "express";
 import "express-async-errors";
 import swaggerUi from "swagger-ui-express";
@@ -7,6 +8,8 @@ import "./shared/container";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 import { router } from "./routes";
 import swaggerFile from "./swagger.json";
+
+dotenv.config();
 
 const app = express();
 
