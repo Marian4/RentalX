@@ -31,3 +31,16 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           source: "., !node_modules"
           target: "~/app/RentalX"
+      - name: UPDATE API
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ~/app/RentalX
+            npm i
+            cd dist
+            ../node_modules/.bin/typeorm migration:run -d ./database/index.js
+            pm2 restart server
