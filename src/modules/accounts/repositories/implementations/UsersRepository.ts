@@ -3,6 +3,7 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../../../../database";
 import { ICreateUserDto } from "../../dtos/ICreateUserDto";
 import { User } from "../../entities/User";
+import { IUserProfile, UserMapper } from "../../mappers/UserMapper";
 import { IUsersRepository } from "../IUsersRepository";
 
 class UsersRepository implements IUsersRepository {
@@ -31,6 +32,12 @@ class UsersRepository implements IUsersRepository {
 
   async update(user: User): Promise<void> {
     await this.repository.save(user);
+  }
+
+  async getProfile(id: string): Promise<IUserProfile> {
+    const user = await this.repository.findOne({ where: { id } });
+
+    return UserMapper.toDTO(user);
   }
 }
 

@@ -8,6 +8,7 @@
     "@typescript-eslint/eslint-plugin": "^5.47.0",
     "aws-sdk": "^2.1463.0",
     "bcrypt": "^5.1.0",
+    "class-transformer": "^0.5.1",
     "crypto": "^1.0.1",
     "csv-parse": "^5.3.3",
     "dayjs": "^1.11.9",
