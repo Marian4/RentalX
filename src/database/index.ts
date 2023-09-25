@@ -2,7 +2,6 @@ import { DataSource } from "typeorm";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
-  host: "localhost",
   username: "docker",
   password: "docker123",
   database: process.env.NODE_ENV === "test" ? "rentalx_test" : "rentalx",
