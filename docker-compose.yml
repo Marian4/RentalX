@@ -1,22 +1,22 @@
 version: "3.7"
 
 services:
-  car_register_db:
+  database:
     image: postgres
-    container_name: car_register_db
+    container_name: rentalx_db
     restart: always
     ports:
       - 5432:5432
     environment:
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=docker123
-      - POSTGRES_DB=car_register
+      - POSTGRES_DB=rentalx
     volumes:
       - pgdata:/data/postgres
     network_mode: host
   app:
     build: .
-    container_name: rentx
+    container_name: rentalx
     ports:
       - 4000:4000
     volumes:
